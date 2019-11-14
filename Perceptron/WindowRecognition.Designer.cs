@@ -29,36 +29,25 @@
         private void InitializeComponent()
         {
             this.panelToDraw = new System.Windows.Forms.Panel();
-            this.labelShowMessage = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
-            this.panelToDraw.SuspendLayout();
+            this.labelNumberToDraw = new System.Windows.Forms.Label();
+            this.Training = new System.Windows.Forms.CheckBox();
+            this.Save = new System.Windows.Forms.Button();
+            this.guessDraw = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panelToDraw
             // 
             this.panelToDraw.BackColor = System.Drawing.Color.White;
             this.panelToDraw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panelToDraw.Controls.Add(this.labelShowMessage);
             this.panelToDraw.Location = new System.Drawing.Point(12, 12);
             this.panelToDraw.Name = "panelToDraw";
-            this.panelToDraw.Size = new System.Drawing.Size(600, 350);
+            this.panelToDraw.Size = new System.Drawing.Size(255, 255);
             this.panelToDraw.TabIndex = 3;
-            this.panelToDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.panelToDraw_Paint);
             this.panelToDraw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelToDraw_MouseDown);
             this.panelToDraw.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelToDraw_MouseMove);
             this.panelToDraw.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelToDraw_MouseUp);
-            // 
-            // labelShowMessage
-            // 
-            this.labelShowMessage.AutoSize = true;
-            this.labelShowMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.labelShowMessage.Location = new System.Drawing.Point(172, 309);
-            this.labelShowMessage.Name = "labelShowMessage";
-            this.labelShowMessage.Size = new System.Drawing.Size(249, 31);
-            this.labelShowMessage.TabIndex = 8;
-            this.labelShowMessage.Text = "labelShowMessage";
-            this.labelShowMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonExit
             // 
@@ -80,19 +69,64 @@
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
+            // labelNumberToDraw
+            // 
+            this.labelNumberToDraw.AutoSize = true;
+            this.labelNumberToDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.labelNumberToDraw.Location = new System.Drawing.Point(114, 270);
+            this.labelNumberToDraw.Name = "labelNumberToDraw";
+            this.labelNumberToDraw.Size = new System.Drawing.Size(29, 31);
+            this.labelNumberToDraw.TabIndex = 9;
+            this.labelNumberToDraw.Text = "0";
+            this.labelNumberToDraw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Training
+            // 
+            this.Training.AutoSize = true;
+            this.Training.Location = new System.Drawing.Point(103, 375);
+            this.Training.Name = "Training";
+            this.Training.Size = new System.Drawing.Size(64, 17);
+            this.Training.TabIndex = 10;
+            this.Training.Text = "Training";
+            this.Training.UseVisualStyleBackColor = true;
+            this.Training.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Save
+            // 
+            this.Save.Location = new System.Drawing.Point(12, 368);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(75, 29);
+            this.Save.TabIndex = 6;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // guessDraw
+            // 
+            this.guessDraw.AutoSize = true;
+            this.guessDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guessDraw.Location = new System.Drawing.Point(173, 368);
+            this.guessDraw.Name = "guessDraw";
+            this.guessDraw.Size = new System.Drawing.Size(266, 24);
+            this.guessDraw.TabIndex = 11;
+            this.guessDraw.Text = "Aqui aparece el dibujo a pintar";
+            // 
             // WindowRecognition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 420);
+            this.Controls.Add(this.guessDraw);
+            this.Controls.Add(this.Training);
+            this.Controls.Add(this.labelNumberToDraw);
+            this.Controls.Add(this.Save);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.panelToDraw);
             this.Name = "WindowRecognition";
             this.Text = "WindowRecognition";
-            this.panelToDraw.ResumeLayout(false);
-            this.panelToDraw.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -100,7 +134,10 @@
 
         private System.Windows.Forms.Panel panelToDraw;
         private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.Label labelShowMessage;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Label labelNumberToDraw;
+        private System.Windows.Forms.CheckBox Training;
+        private System.Windows.Forms.Button Save;
+        private System.Windows.Forms.Label guessDraw;
     }
 }
