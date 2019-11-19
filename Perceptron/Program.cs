@@ -94,11 +94,11 @@ namespace Perceptron
         static void Main(string[] args)
         {
 
-           // Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new WindowRecognition());
+            Application.EnableVisualStyles();
+           Application.SetCompatibleTextRenderingDefault(false);
+           Application.Run(new WindowRecognition());
             
-
+            /**
             Perceptron p;
             
 
@@ -148,7 +148,7 @@ namespace Perceptron
                 }
             }
             peticionsalida(p);
-           // evaluar(p, 0, 5, 0.1); 
+           // evaluar(p, 0, 5, 0.1); */
         }
     }
     [Serializable]

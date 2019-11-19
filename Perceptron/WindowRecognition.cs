@@ -19,9 +19,8 @@ namespace Perceptron
         int numberToDraw = 0;
         int histogramaCeros;
         int histogramaUnos;
-        int typeOutput = 1;
-
-        string drawToDraw = "montain";
+        int typeOutput = 11;
+        string drawToDraw = "cara";
 
         public WindowRecognition()
         {
