@@ -17,6 +17,11 @@ namespace Perceptron
         bool paint = false;
         SolidBrush color;
         int numberToDraw = 0;
+        int histogramaCeros;
+        int histogramaUnos;
+        int typeOutput = 1;
+
+        string drawToDraw = "montain";
 
         public WindowRecognition()
         {
@@ -68,61 +73,13 @@ namespace Perceptron
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            if (Training.Checked == false)
-            {
-                Application.Exit();
-            }
-            else
-            {
-
-                //Create bitmap with width and height are equal to panel1
-                Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
-                //-----use using like dispose function to clean up all resources
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    //Fix sixe and location of panel1 in screen
-                    Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
-                    //-----copy panel1 from screen
-                    g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
-                }
-
-                //Get value of each pixel
-                int[][] pixels = new int[bmp.Height][];
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    pixels[y] = new int[bmp.Width];
-                }
-                for (int x = 0; x < bmp.Width; x++)
-                {
-                    for (int y = 0; y < bmp.Height; y++)
-                    {
-                        System.Console.Write(bmp.GetPixel(x, y).GetBrightness());
-                        if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
-                        {
-                            //One refers to black
-                            pixels[y][x] = 1;
-                            System.Console.Write(pixels[y][x]);
-                        }
-                        else
-                        {
-                            //Zero refers to white
-                            pixels[y][x] = 0;
-                            System.Console.Write(pixels[y][x]);
-                        }
-                    }
-                    System.Console.WriteLine();
-                }
-                //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
-                string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
-                //String[] ids = pixels.Select(a => String.Join("", a).ToArray();
-                richTextBoxShowData.Lines = ids;
-            }
-           
-
+             Application.Exit();
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
+            handwritingRecognition();
+
             //Create bitmap with width and height are equal to panel1
             Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
             //-----use using like dispose function to clean up all resources
@@ -144,7 +101,7 @@ namespace Perceptron
                 }
                 //labelNumberToDraw.text is a name of directory
                 string[] filenames = Directory.GetFiles(directory_name);
-                string filename = directory_name+".bmp";
+                string filename = directory_name + ".bmp";
                 if (filenames.Length != 0)
                 {
                     int maxNum = filenames.Where(a =>
@@ -166,10 +123,18 @@ namespace Perceptron
                     filename = (maxNum + 1) + ".bmp";
                 }
               //bmp.Save(Path.GetFullPath(directory_name) + "/" + filename, ImageFormat.Bmp); //Importante
-                bmp.Save("D:/Dano/Escritorio/Dataset-Draw/"+"serpiente" + filename, ImageFormat.Bmp); 
+                bmp.Save("D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename, ImageFormat.Bmp); 
               //labelShowMessage.Text = "--- Image " + filename + " saved ---";
               //labelShowMessage.ForeColor = Color.Blue;
               //MessageBox.Show("Image saved successfully.");
+
+                string rutaCompleta = "D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename + "_his.txt";
+                using (StreamWriter file = new StreamWriter(rutaCompleta, true))
+                {
+                    file.WriteLine(histogramaCeros + "," + histogramaUnos + "," + typeOutput);
+                    file.Close();
+                }
+
                 clearPanel();
               // richTextBoxShowData.Clear();
                 numberToDraw++;
@@ -184,6 +149,9 @@ namespace Perceptron
             {
                 MessageBox.Show("Image not save: " + ex.Message);
             }
+
+            histogramaCeros = 0;
+            histogramaUnos = 0;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -207,6 +175,51 @@ namespace Perceptron
                 richTextBoxShowData.Visible = false;
             }
 
+        }
+
+        public void handwritingRecognition()
+        {
+
+            //Create bitmap with width and height are equal to panel1
+            Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
+            //-----use using like dispose function to clean up all resources
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                //Fix sixe and location of panel1 in screen
+                Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
+                //-----copy panel1 from screen
+                g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
+            }
+
+            //Get value of each pixel
+            int[][] pixels = new int[bmp.Height][];
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                pixels[y] = new int[bmp.Width];
+            }
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
+                    {
+                        //One refers to black
+                        pixels[y][x] = 1;
+                        histogramaUnos++;
+
+                    }
+                    else
+                    {
+                        //Zero refers to white
+                        pixels[y][x] = 0;
+                        histogramaCeros++;
+                    }
+                }
+            }
+            //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
+            string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
+            //String[] ids = pixels.Select(a => String.Join("", a).ToArray();
+            richTextBoxShowData.Lines = ids;
         }
 
     }

@@ -14,12 +14,12 @@ namespace Perceptron
     {
         static List<double[]> entrada = new List<double[]>();
         static List<double[]> salida= new List<double[]>();
-        static int numentradas=4;
+        static int numentradas=2;
         static int numsalidas=1;
-        static String ruta = @"D:\Dano\Escritorio\train-images.idx3-ubyte.csv";
-        static String rutasalida = @"D:\Dano\Escritorio\train-labels.idx1-ubyte.csv";
-        static String rutaneurona = @"D:\Dano\Escritorio\train.bin";
-        static double maxentr=5;
+        static String ruta = @"D:/Dano/Escritorio/Dataset-Draw/datasetPrueba.csv";
+        static String rutasalida = @"D:/Dano/Escritorio/Dataset-Draw/salida.csv";
+        static String rutaneurona = @"D:/Dano/Escritorio/Dataset-Draw/neurona.bin";
+        static double maxentr=40;
         static double minentrada=0;
         static double minsal=2;
         static double maxsal=0;
@@ -94,12 +94,12 @@ namespace Perceptron
         static void Main(string[] args)
         {
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WindowRecognition());
+           // Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new WindowRecognition());
             
 
-            /**Perceptron p;
+            Perceptron p;
             
 
             if (!cargarred)
@@ -148,7 +148,7 @@ namespace Perceptron
                 }
             }
             peticionsalida(p);
-           // evaluar(p, 0, 5, 0.1);   **/
+           // evaluar(p, 0, 5, 0.1); 
         }
     }
     [Serializable]
