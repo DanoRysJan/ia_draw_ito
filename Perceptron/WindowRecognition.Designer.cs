@@ -118,7 +118,7 @@
             this.richTextBoxShowData.Location = new System.Drawing.Point(281, 12);
             this.richTextBoxShowData.Name = "richTextBoxShowData";
             this.richTextBoxShowData.ReadOnly = true;
-            this.richTextBoxShowData.Size = new System.Drawing.Size(333, 255);
+            this.richTextBoxShowData.Size = new System.Drawing.Size(333, 350);
             this.richTextBoxShowData.TabIndex = 12;
             this.richTextBoxShowData.Text = "";
             this.richTextBoxShowData.WordWrap = false;
