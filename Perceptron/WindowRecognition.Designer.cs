@@ -35,6 +35,7 @@
             this.Training = new System.Windows.Forms.CheckBox();
             this.Save = new System.Windows.Forms.Button();
             this.guessDraw = new System.Windows.Forms.Label();
+            this.richTextBoxShowData = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // panelToDraw
@@ -111,11 +112,24 @@
             this.guessDraw.TabIndex = 11;
             this.guessDraw.Text = "Aqui aparece el dibujo a pintar";
             // 
+            // richTextBoxShowData
+            // 
+            this.richTextBoxShowData.Font = new System.Drawing.Font("Courier New", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxShowData.Location = new System.Drawing.Point(281, 12);
+            this.richTextBoxShowData.Name = "richTextBoxShowData";
+            this.richTextBoxShowData.ReadOnly = true;
+            this.richTextBoxShowData.Size = new System.Drawing.Size(333, 255);
+            this.richTextBoxShowData.TabIndex = 12;
+            this.richTextBoxShowData.Text = "";
+            this.richTextBoxShowData.WordWrap = false;
+            this.richTextBoxShowData.TextChanged += new System.EventHandler(this.richTextBoxShowData_TextChanged);
+            // 
             // WindowRecognition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 420);
+            this.Controls.Add(this.richTextBoxShowData);
             this.Controls.Add(this.guessDraw);
             this.Controls.Add(this.Training);
             this.Controls.Add(this.labelNumberToDraw);
@@ -139,5 +153,6 @@
         private System.Windows.Forms.CheckBox Training;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Label guessDraw;
+        private System.Windows.Forms.RichTextBox richTextBoxShowData;
     }
 }

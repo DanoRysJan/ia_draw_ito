@@ -68,7 +68,45 @@ namespace Perceptron
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+           // Application.Exit();
+
+            //-----create bitmap with width and height are equal to panel1
+            Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
+            //-----use using like dispose function to clean up all resources
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                //-----fix sixe and location of panel1 in screen
+                Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
+                //-----copy panel1 from screen
+                g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
+            }
+
+            //-----get value of each pixel
+            int[][] pixels = new int[bmp.Height][];
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                pixels[y] = new int[bmp.Width];
+            }
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
+                    {
+                        //-----one refers to black
+                        pixels[y][x] = 1;
+                    }
+                    else
+                    {
+                        //-----zero refers to white
+                        pixels[y][x] = 0;
+                    }
+                }
+            }
+            //put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
+            string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
+            //string[] ids = pixels.Select(a => String.Join("", a).ToArray();
+            richTextBoxShowData.Lines = ids;
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -154,6 +192,11 @@ namespace Perceptron
                 Save.Visible = false;
                 guessDraw.Visible = true;
             }
+
+        }
+
+        private void richTextBoxShowData_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
