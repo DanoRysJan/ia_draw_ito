@@ -75,18 +75,18 @@ namespace Perceptron
             else
             {
 
-                //-----create bitmap with width and height are equal to panel1
+                //Create bitmap with width and height are equal to panel1
                 Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
                 //-----use using like dispose function to clean up all resources
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    //-----fix sixe and location of panel1 in screen
+                    //Fix sixe and location of panel1 in screen
                     Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
                     //-----copy panel1 from screen
                     g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
                 }
 
-                //-----get value of each pixel
+                //Get value of each pixel
                 int[][] pixels = new int[bmp.Height][];
                 for (int y = 0; y < bmp.Height; y++)
                 {
@@ -96,21 +96,25 @@ namespace Perceptron
                 {
                     for (int y = 0; y < bmp.Height; y++)
                     {
+                        System.Console.Write(bmp.GetPixel(x, y).GetBrightness());
                         if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
                         {
-                            //-----one refers to black
+                            //One refers to black
                             pixels[y][x] = 1;
+                            System.Console.Write(pixels[y][x]);
                         }
                         else
                         {
-                            //-----zero refers to white
+                            //Zero refers to white
                             pixels[y][x] = 0;
+                            System.Console.Write(pixels[y][x]);
                         }
                     }
+                    System.Console.WriteLine();
                 }
-                //put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
+                //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
                 string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
-                //string[] ids = pixels.Select(a => String.Join("", a).ToArray();
+                //String[] ids = pixels.Select(a => String.Join("", a).ToArray();
                 richTextBoxShowData.Lines = ids;
             }
            
@@ -119,18 +123,18 @@ namespace Perceptron
 
         private void Save_Click(object sender, EventArgs e)
         {
-            //-----create bitmap with width and height are equal to panel1
+            //Create bitmap with width and height are equal to panel1
             Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
             //-----use using like dispose function to clean up all resources
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                //-----fix sixe and location of panel1 in screen
+                //Fix sixe and location of panel1 in screen
                 Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
                 //-----copy panel1 from screen
                 g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
             }
 
-            //-----save image into bmp
+            //Save image into bmp
             try
             {
                 string directory_name = labelNumberToDraw.Text;
@@ -161,20 +165,20 @@ namespace Perceptron
                                         });
                     filename = (maxNum + 1) + ".bmp";
                 }
-              // bmp.Save(Path.GetFullPath(directory_name) + "/" + filename, ImageFormat.Bmp); //Importante
+              //bmp.Save(Path.GetFullPath(directory_name) + "/" + filename, ImageFormat.Bmp); //Importante
                 bmp.Save("D:/Dano/Escritorio/Dataset-Draw/"+"serpiente" + filename, ImageFormat.Bmp); 
-               // labelShowMessage.Text = "--- Image " + filename + " saved ---";
-                //labelShowMessage.ForeColor = Color.Blue;
-                //MessageBox.Show("Image saved successfully.");
+              //labelShowMessage.Text = "--- Image " + filename + " saved ---";
+              //labelShowMessage.ForeColor = Color.Blue;
+              //MessageBox.Show("Image saved successfully.");
                 clearPanel();
-               // richTextBoxShowData.Clear();
+              // richTextBoxShowData.Clear();
                 numberToDraw++;
                 if (numberToDraw >= 20)
                 {
                     labelNumberToDraw.Text = "Training is complete.";
                 }
                labelNumberToDraw.Text = numberToDraw.ToString();
-                
+            
             }
             catch (Exception ex)
             {
@@ -205,9 +209,5 @@ namespace Perceptron
 
         }
 
-        private void richTextBoxShowData_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -122,7 +122,6 @@
             this.richTextBoxShowData.TabIndex = 12;
             this.richTextBoxShowData.Text = "";
             this.richTextBoxShowData.WordWrap = false;
-            this.richTextBoxShowData.TextChanged += new System.EventHandler(this.richTextBoxShowData_TextChanged);
             // 
             // WindowRecognition
             // 
