@@ -17,10 +17,11 @@ namespace Perceptron
         bool paint = false;
         SolidBrush color;
         int numberToDraw = 0;
-        int histogramaCeros;
-        int histogramaUnos;
-        int typeOutput = 11;
-        string drawToDraw = "cara";
+        int histZero, histOne;
+        int typeOutput = 13;
+        string drawToDraw = "ventana";
+        int posXRight, posYRigth, posXLeft, posYLeft, posXUp,posYUp, posXDown,posYDown;
+        int posXL, posXR,posYD;
 
         public WindowRecognition()
         {
@@ -72,21 +73,23 @@ namespace Perceptron
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-             Application.Exit();
+             //Application.Exit();
+            handwritingRecognition();
+
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            handwritingRecognition();
+           // handwritingRecognition();
 
             //Create bitmap with width and height are equal to panel1
             Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
-            //-----use using like dispose function to clean up all resources
+            //Use using like dispose function to clean up all resources
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 //Fix sixe and location of panel1 in screen
                 Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
-                //-----copy panel1 from screen
+                //Copy panel1 from screen
                 g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
             }
 
@@ -98,7 +101,7 @@ namespace Perceptron
                 {
                     Directory.CreateDirectory(directory_name);
                 }
-                //labelNumberToDraw.text is a name of directory
+
                 string[] filenames = Directory.GetFiles(directory_name);
                 string filename = directory_name + ".bmp";
                 if (filenames.Length != 0)
@@ -127,16 +130,18 @@ namespace Perceptron
               //labelShowMessage.ForeColor = Color.Blue;
               //MessageBox.Show("Image saved successfully.");
 
+                //Create the dataset with histZero = all 0 in the bmp , histOne = all 1 in the bmp , and the typeOutput
                 string rutaCompleta = "D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename + "_his.txt";
                 using (StreamWriter file = new StreamWriter(rutaCompleta, true))
                 {
-                    file.WriteLine(histogramaCeros + "," + histogramaUnos + "," + typeOutput);
+                    file.WriteLine(histZero + "," + histOne + "," + typeOutput);
                     file.Close();
                 }
-
-                clearPanel();
-              // richTextBoxShowData.Clear();
+                //clearPanel();
+                //richTextBoxShowData.Clear();
+                
                 numberToDraw++;
+
                 if (numberToDraw >= 20)
                 {
                     labelNumberToDraw.Text = "Training is complete.";
@@ -149,8 +154,8 @@ namespace Perceptron
                 MessageBox.Show("Image not save: " + ex.Message);
             }
 
-            histogramaCeros = 0;
-            histogramaUnos = 0;
+            histZero = 0;
+            histOne  = 0;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -173,12 +178,12 @@ namespace Perceptron
                 guessDraw.Visible = true;
                 richTextBoxShowData.Visible = false;
             }
-
         }
 
         public void handwritingRecognition()
         {
-
+            histZero = 0;
+            histOne = 0;
             //Create bitmap with width and height are equal to panel1
             Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
             //-----use using like dispose function to clean up all resources
@@ -186,7 +191,7 @@ namespace Perceptron
             {
                 //Fix sixe and location of panel1 in screen
                 Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
-                //-----copy panel1 from screen
+                //Copy panel1 from screen
                 g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
             }
 
@@ -195,31 +200,78 @@ namespace Perceptron
             for (int y = 0; y < bmp.Height; y++)
             {
                 pixels[y] = new int[bmp.Width];
+
             }
             for (int x = 0; x < bmp.Width; x++)
             {
                 for (int y = 0; y < bmp.Height; y++)
                 {
-                    if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
+                   if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
                     {
+                       
                         //One refers to black
                         pixels[y][x] = 1;
-                        histogramaUnos++;
+                        histOne++;
+                        
+                        //Get the pixel UP
+                        if (histOne == 1)
+                        {
+                            posXUp = x;
+                            posYUp = y;
+                           // Console.Write(x+" " + y);
+                            posXL = x;
+                            posXR = x;
+                            posYD = y;
+                        }
 
+                       //Get the pixel of the Left
+                        if (x < posXL)
+                        {
+                            posXL=x;
+                            posXLeft = posXL;
+                            posYLeft = y;
+                            //Console.Write(posXL + " " + y);
+                        }
+                        //Get the pixel of the rigth
+                        if (x > posXR)
+                        {
+                            posXR = x;
+                            posXRight = posXR;
+                            posYRigth= y;
+                           // Console.Write(posXR + " " + y);
+                        }
+                        //Get the pixel of the rigth
+                        if (y < posYD)
+                        {
+                            posYD = x;
+                            posXDown = posYD;
+                            posYDown = y;
+                            //Console.Write(posYD + " " + y);
+                        }
                     }
                     else
                     {
                         //Zero refers to white
                         pixels[y][x] = 0;
-                        histogramaCeros++;
+                        histZero++;
                     }
+                   
+
                 }
             }
             //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
             string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
             //String[] ids = pixels.Select(a => String.Join("", a).ToArray();
             richTextBoxShowData.Lines = ids;
+            toFrame();
         }
 
+        private void toFrame()
+        {
+            Console.WriteLine("FINALES: " + "Arr: " + posXUp + " " + posYUp);
+            Console.WriteLine("FINALES: " + "Izq: " + posXLeft + " " + posYLeft);
+            Console.WriteLine("FINALES: " + "Der: " + posXRight + " " + posYRigth);
+            Console.WriteLine("FINALES: " + "Abj: " + posXDown + " " + posYDown);
+        }
     }
 }

@@ -16,15 +16,15 @@ namespace Perceptron
         static List<double[]> salida= new List<double[]>();
         static int numentradas=2;
         static int numsalidas=1;
-        static String ruta = @"D:/Dano/Escritorio/Dataset-Draw/datasetPrueba.csv";
+        static String ruta = @"D:/Dano/Escritorio/Dataset-Draw/dataset.csv";
         static String rutasalida = @"D:/Dano/Escritorio/Dataset-Draw/salida.csv";
         static String rutaneurona = @"D:/Dano/Escritorio/Dataset-Draw/neurona.bin";
-        static double maxentr=40;
+        static double maxentr=60;
         static double minentrada=0;
         static double minsal=2;
         static double maxsal=0;
-        static bool guardarred=false;
-        static bool cargarred = true;
+        static bool guardarred=true;
+        static bool cargarred = false;
 
         static double Normalizar(double valor, double min, double max)
         {
@@ -95,8 +95,8 @@ namespace Perceptron
         {
 
             Application.EnableVisualStyles();
-           Application.SetCompatibleTextRenderingDefault(false);
-           Application.Run(new WindowRecognition());
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new WindowRecognition());
             
             /**
             Perceptron p;
