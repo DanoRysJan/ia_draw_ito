@@ -21,7 +21,7 @@ namespace Perceptron
         int typeOutput = 13;
         string drawToDraw = "ventana";
         int posXRight, posYRigth, posXLeft, posYLeft, posXUp,posYUp, posXDown,posYDown;
-        int posXL, posXR,posYD;
+        int posYL, posYR,posYD;
 
         public WindowRecognition()
         {
@@ -49,7 +49,7 @@ namespace Perceptron
                 using (Graphics g = panelToDraw.CreateGraphics())
                 {
                     //-----fill ellipse with color which e is mouse, e.X is mouse click at the current X position
-                    g.FillEllipse(color, e.X, e.Y, 10, 10);
+                    g.FillEllipse(color, e.X, e.Y, 5, 5);
                 }
             }
         }
@@ -208,37 +208,34 @@ namespace Perceptron
                 {
                    if (bmp.GetPixel(x, y).GetBrightness() < 0.5)
                     {
-                       
                         //One refers to black
                         pixels[y][x] = 1;
                         histOne++;
                         
-                        //Get the pixel UP
+                        //Get the pixel Left
                         if (histOne == 1)
                         {
-                            posXUp = x;
-                            posYUp = y;
+                            posXLeft = x;
+                            posYLeft = y;
                            // Console.Write(x+" " + y);
-                            posXL = x;
-                            posXR = x;
+                            posYL = y;
+                            posYR = y;
                             posYD = y;
                         }
-
-                       //Get the pixel of the Left
-                        if (x < posXL)
+                       //Get the pixel of the Up
+                        if (y < posYL)
                         {
-                            posXL=x;
-                            posXLeft = posXL;
-                            posYLeft = y;
-                            //Console.Write(posXL + " " + y);
+                            posYL = y;
+                            posXUp = x;
+                            posYUp = posYL;
+                           // Console.Write(posYL + " " + y);
                         }
-                        //Get the pixel of the rigth
-                        if (x > posXR)
+                        //Get the pixel of the Down
+                        if (y > posYD)
                         {
-                            posXR = x;
-                            posXRight = posXR;
-                            posYRigth= y;
-                           // Console.Write(posXR + " " + y);
+                            posYD = y;
+                            posXDown = x;
+                            posYDown= posYD;
                         }
                         //Get the pixel of the rigth
                         if (y < posYD)
@@ -268,10 +265,10 @@ namespace Perceptron
 
         private void toFrame()
         {
-            Console.WriteLine("FINALES: " + "Arr: " + posXUp + " " + posYUp);
-            Console.WriteLine("FINALES: " + "Izq: " + posXLeft + " " + posYLeft);
-            Console.WriteLine("FINALES: " + "Der: " + posXRight + " " + posYRigth);
-            Console.WriteLine("FINALES: " + "Abj: " + posXDown + " " + posYDown);
+           Console.WriteLine("FINALES: " + "Arr: " + posXUp + " " + posYUp);
+           Console.WriteLine("FINALES: " + "Izq: " + posXLeft + " " + posYLeft);
+           //Console.WriteLine("FINALES: " + "Der: " + posXRight + " " + posYRigth);
+           Console.WriteLine("FINALES: " + "Abj: " + posXDown + " " + posYDown);
         }
     }
 }
