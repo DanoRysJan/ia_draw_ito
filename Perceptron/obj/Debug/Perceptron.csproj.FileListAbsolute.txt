@@ -21,12 +21,6 @@ D:\Dano\Escritorio\Perceptron\Perceptron\obj\Debug\Perceptron.MDIParent1.resourc
 D:\Dano\Escritorio\Perceptron\Perceptron\obj\Debug\Perceptron.WindowRecognition.resources
 D:\Dano\Escritorio\Perceptron\Perceptron\obj\Debug\Perceptron.csproj.GenerateResource.Cache
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\Perceptron.exe.config
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.exe
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.pdb
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.csprojResolveAssemblyReference.cache
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.MDIParent1.resources
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.WindowRecognition.resources
-C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.csproj.GenerateResource.Cache
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\Perceptron.exe
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\Perceptron.pdb
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\mscorlib.dll
@@ -36,3 +30,8 @@ C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\normnfc.nlp
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\normnfd.nlp
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\normnfkc.nlp
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\bin\Debug\normnfkd.nlp
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.MDIParent1.resources
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.WindowRecognition.resources
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.csproj.GenerateResource.Cache
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.exe
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.pdb

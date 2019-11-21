@@ -21,7 +21,7 @@ namespace Perceptron
         int typeOutput = 13;
         string drawToDraw = "ventana";
         int posXRight, posYRigth, posXLeft, posYLeft, posXUp,posYUp, posXDown,posYDown;
-        int posYL, posYR,posYD;
+        int posYU, posYR,posYD;
 
         public WindowRecognition()
         {
@@ -195,12 +195,16 @@ namespace Perceptron
                 g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
             }
 
+            // Instance of next pixel
+            posYU = bmp.Width;
+            posYR = 0;
+            posYD = bmp.Height;
+
             //Get value of each pixel
             int[][] pixels = new int[bmp.Height][];
             for (int y = 0; y < bmp.Height; y++)
             {
                 pixels[y] = new int[bmp.Width];
-
             }
             for (int x = 0; x < bmp.Width; x++)
             {
@@ -217,33 +221,35 @@ namespace Perceptron
                         {
                             posXLeft = x;
                             posYLeft = y;
-                           // Console.Write(x+" " + y);
-                            posYL = y;
-                            posYR = y;
-                            posYD = y;
+
+                           
                         }
                        //Get the pixel of the Up
-                        if (y < posYL)
+                        if (y < posYU)
                         {
-                            posYL = y;
+                            posYU = y;
                             posXUp = x;
-                            posYUp = posYL;
-                           // Console.Write(posYL + " " + y);
+                            posYUp = posYU;
                         }
-                        //Get the pixel of the Down
+                        //Get the pixel of the Rigth
                         if (y > posYD)
                         {
                             posYD = y;
                             posXDown = x;
                             posYDown= posYD;
                         }
-                        //Get the pixel of the rigth
                         if (y < posYD)
                         {
                             posYD = x;
                             posXDown = posYD;
                             posYDown = y;
-                            //Console.Write(posYD + " " + y);
+                        }
+                        //Get the pixel of the Down
+                        if (y > posYR)
+                        {
+                            posYR = y;
+                            posXRight = x;
+                            posYRigth = posYR;
                         }
                     }
                     else
@@ -252,8 +258,6 @@ namespace Perceptron
                         pixels[y][x] = 0;
                         histZero++;
                     }
-                   
-
                 }
             }
             //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
@@ -267,8 +271,8 @@ namespace Perceptron
         {
            Console.WriteLine("FINALES: " + "Arr: " + posXUp + " " + posYUp);
            Console.WriteLine("FINALES: " + "Izq: " + posXLeft + " " + posYLeft);
-           //Console.WriteLine("FINALES: " + "Der: " + posXRight + " " + posYRigth);
-           Console.WriteLine("FINALES: " + "Abj: " + posXDown + " " + posYDown);
+           Console.WriteLine("FINALES: " + "Der: " + posXDown + " " + posYDown);
+           Console.WriteLine("FINALES: " + "Abj: " + posXRight + " " + posYRigth);
         }
     }
 }
