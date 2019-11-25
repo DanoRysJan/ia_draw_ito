@@ -14,15 +14,15 @@ namespace Perceptron
     {
         static List<double[]> entrada = new List<double[]>();
         static List<double[]> salida= new List<double[]>();
-        static int numentradas=2;
+        static int numentradas=5;
         static int numsalidas=1;
-        static String ruta = @"D:/Dano/Escritorio/Dataset-Draw/dataset.csv";
-        static String rutasalida = @"D:/Dano/Escritorio/Dataset-Draw/salida.csv";
-        static String rutaneurona = @"D:/Dano/Escritorio/Dataset-Draw/neurona.bin";
-        static double maxentr=60;
-        static double minentrada=0;
+        static String ruta = @"D:/Dano/Escritorio/DatasetDraw/Dataset-Draw_his.csv";
+        static String rutasalida = @"D:/Dano/Escritorio/DatasetDraw/salida.csv";
+        static String rutaneurona = @"D:/Dano/Escritorio/DatasetDraw/neurona.bin";
+        static double maxentr=6;
+        static double minentrada=5;
         static double minsal=2;
-        static double maxsal=0;
+        static double maxsal=1;
         static bool guardarred=true;
         static bool cargarred = false;
 
@@ -94,19 +94,22 @@ namespace Perceptron
         static void Main(string[] args)
         {
 
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WindowRecognition());
             
-            /**
+            
+             
+            /*
             Perceptron p;
             
 
             if (!cargarred)
             {
                 leerDatos();
-                 p = new Perceptron(new int[] { entrada[0].Length, 8, 8, salida[0].Length });
-                while (!p.aprender(entrada, salida, 0.05, 0.01, 5000))
+                 p = new Perceptron(new int[] { entrada[0].Length, 36, 36, salida[0].Length });
+                while (!p.aprender(entrada, salida, 0.05, 0.01, 50000))
                 {
                     p = new Perceptron(new int[] { entrada[0].Length, 8, 8, salida[0].Length });
                 }

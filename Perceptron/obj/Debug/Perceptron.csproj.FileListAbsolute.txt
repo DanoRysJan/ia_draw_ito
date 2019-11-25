@@ -35,3 +35,4 @@ C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.WindowRecogn
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.csproj.GenerateResource.Cache
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.exe
 C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.pdb
+C:\xampp\htdocs\Progress\Perceptron\Perceptron\obj\Debug\Perceptron.csprojResolveAssemblyReference.cache

@@ -1,0 +1,144 @@
+﻿ //Create bitmap with width and height are equal to panel1
+            Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
+            //Use using like dispose function to clean up all resources
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                //Fix sixe and location of panel1 in screen
+                Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
+                //Copy panel1 from screen
+                g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
+            }
+
+            //Save image into bmp
+            try
+            {
+                string directory_name = labelNumberToDraw.Text;
+                if (!Directory.Exists(directory_name))
+                {
+                    Directory.CreateDirectory(directory_name);
+                }
+
+                string[] filenames = Directory.GetFiles(directory_name);
+                string filename = directory_name + ".bmp";
+                if (filenames.Length != 0)
+                {
+                    int maxNum = filenames.Where(a =>
+                    {
+                        try
+                        {
+                            Convert.ToInt32(Path.GetFileNameWithoutExtension(a));
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            return false;
+                        }
+                    })
+                                        .Max(a =>
+                                        {
+                                            return Convert.ToInt32(Path.GetFileNameWithoutExtension(a));
+                                        });
+                    filename = (maxNum + 1) + ".bmp";
+                }
+                //bmp.Save(Path.GetFullPath(directory_name) + "/" + filename, ImageFormat.Bmp); //Importante
+                bmp.Save("D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename, ImageFormat.Bmp);
+                //labelShowMessage.Text = "--- Image " + filename + " saved ---";
+                //labelShowMessage.ForeColor = Color.Blue;
+                //MessageBox.Show("Image saved successfully.");
+
+                //Create the dataset with histZero = all 0 in the bmp , histOne = all 1 in the bmp , and the typeOutput
+                string rutaCompleta = "D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename + "_his.txt";
+                using (StreamWriter file = new StreamWriter(rutaCompleta, true))
+                {
+                    file.WriteLine(histZero + "," + histOne + "," + typeOutput);
+                    file.Close();
+                }
+                //clearPanel();
+                //richTextBoxShowData.Clear();
+
+                numberToDraw++;
+
+                if (numberToDraw >= 20)
+                {
+                    labelNumberToDraw.Text = "Training is complete.";
+               
+			   
+			   
+			    }
+
+
+				// handwritingRecognition();
+            //Create bitmap with width and height are equal to panel1
+            //Bitmap bmp = handwritingRecognition();
+            //Use using like dispose function to clean up all resources
+            /* using (Graphics g = Graphics.FromImage(bmp))
+             {
+                 //Fix sixe and location of panel1 in screen
+                 Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
+                 //Copy panel1 from screen
+                 g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
+             }*/
+
+            //Save image into bmp
+            try
+            {
+                string directory_name = labelNumberToDraw.Text;
+                if (!Directory.Exists(directory_name))
+                {
+                    Directory.CreateDirectory(directory_name);
+                }
+
+                string[] filenames = Directory.GetFiles(directory_name);
+                string filename = directory_name + ".bmp";
+                if (filenames.Length != 0)
+                {
+                    int maxNum = filenames.Where(a =>
+                    {
+                        try
+                        {
+                            Convert.ToInt32(Path.GetFileNameWithoutExtension(a));
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            return false;
+                        }
+                    })
+                                        .Max(a =>
+                                        {
+                                            return Convert.ToInt32(Path.GetFileNameWithoutExtension(a));
+                                        });
+                    filename = (maxNum + 1) + ".bmp";
+                }
+                //bmp.Save(Path.GetFullPath(directory_name) + "/" + filename, ImageFormat.Bmp); //Importante
+                //bmp.Save("D:/Dano/Escritorio/Dataset-Draw/" + drawToDraw + filename, ImageFormat.Bmp); 
+                //labelShowMessage.Text = "--- Image " + filename + " saved ---";
+                //labelShowMessage.ForeColor = Color.Blue;
+                //MessageBox.Show("Image saved successfully.");
+
+                //Create the dataset with histZero = all 0 in the bmp , histOne = all 1 in the bmp , and the typeOutput
+                /* string rutaCompleta = "C:/Users/Obet/Desktop/" + drawToDraw + filename + "_his.txt";
+                 using (StreamWriter file = new StreamWriter(rutaCompleta, true))
+                 {
+                     file.WriteLine(histZero + "," + histOne + "," + typeOutput);
+                     file.Close();
+                 }*/
+                clearPanel();
+                //richTextBoxShowData.Clear();
+
+                numberToDraw++;
+
+                if (numberToDraw >= 20)
+                {
+                    labelNumberToDraw.Text = "Training is complete.";
+                }
+                labelNumberToDraw.Text = numberToDraw.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Image not save: " + ex.Message);
+            }
+
+            histZero = 0;
+            histOne = 0;

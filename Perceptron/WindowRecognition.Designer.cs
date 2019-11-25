@@ -74,11 +74,11 @@
             // 
             this.labelNumberToDraw.AutoSize = true;
             this.labelNumberToDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.labelNumberToDraw.Location = new System.Drawing.Point(114, 270);
+            this.labelNumberToDraw.Location = new System.Drawing.Point(58, 270);
             this.labelNumberToDraw.Name = "labelNumberToDraw";
-            this.labelNumberToDraw.Size = new System.Drawing.Size(29, 31);
+            this.labelNumberToDraw.Size = new System.Drawing.Size(143, 31);
             this.labelNumberToDraw.TabIndex = 9;
-            this.labelNumberToDraw.Text = "0";
+            this.labelNumberToDraw.Text = "Dibuja un: ";
             this.labelNumberToDraw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Training
@@ -127,6 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(626, 420);
             this.Controls.Add(this.richTextBoxShowData);
             this.Controls.Add(this.guessDraw);
