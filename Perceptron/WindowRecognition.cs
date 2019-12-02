@@ -13,6 +13,7 @@ namespace Perceptron
 {
     public partial class WindowRecognition : Form
     {
+        Perceptron red;
         Bitmap target;
         SolidBrush color;
         bool paint = false;
@@ -28,8 +29,9 @@ namespace Perceptron
         int typeOutput = 4;
         int idDraw;
 
-        public WindowRecognition()
+        public WindowRecognition(Perceptron p)
         {
+            red = p;
             InitializeComponent();
             Training.Checked = true;
             guessDraw.Visible = false;
@@ -415,7 +417,8 @@ namespace Perceptron
 
         private void btnRecognition_Click(object sender, EventArgs e)
         {
-
+            Program p = new Program();
+            p.peticionsalida(red, 1213, 1);
         }
     }
 }

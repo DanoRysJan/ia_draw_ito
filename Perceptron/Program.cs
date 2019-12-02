@@ -13,17 +13,18 @@ namespace Perceptron
     class Program
     {
         static List<double[]> entrada = new List<double[]>();
-        static List<double[]> salida= new List<double[]>();
-        static int numentradas=5;
-        static int numsalidas=1;
-        static String ruta = @"D:/Dano/Escritorio/DatasetDraw/Dataset-Draw_his.csv";
-        static String rutasalida = @"D:/Dano/Escritorio/DatasetDraw/salida.csv";
-        static String rutaneurona = @"D:/Dano/Escritorio/datosirisguardado.bin";
-        static double maxentr=6;
-        static double minentrada=5;
-        static double minsal=2;
-        static double maxsal=1;
-        static bool guardarred=false;
+        static List<double[]> salida = new List<double[]>();
+        static int numentradas = 2;
+        static int numsalidas = 1;
+        static String ruta = @"D:\Dano\Escritorio\dataSetpuerba.csv";
+        static String test = @"D:\Dano\Escritorio\test.csv";
+        static String rutasalida = @"D:\Dano\Escritorio\datostermocuplasalida.csv";
+        static String rutaneurona = @"D:\Dano\Escritorio\datosirisguardado.bin";
+        static double maxentr = 3;
+        static double minentrada = 0;
+        static double minsal = 2;
+        static double maxsal = 0;
+        static bool guardarred = false;
         static bool cargarred = true;
 
         static double Normalizar(double valor, double min, double max)
@@ -33,42 +34,86 @@ namespace Perceptron
         static double desnormalizado(double valor, double min, double max)
         {
             return valor * (max - min) + min;
+        }   
+        static string[] leerDatosentrada()
+        {
+            string datos = System.IO.File.ReadAllText(test).Replace("\r", "");
+            string[] fila = datos.Split(Environment.NewLine.ToCharArray());
+
+            for (int i = 0; i < fila.Length; i++)
+            {
+                string[] filadatos = fila[i].Split(';');
+                double[] entradas = new double[numentradas];
+                double[] salidas = new double[numsalidas];
+                /*for (int j = 0; j < filadatos.Length; j++)
+                {
+                    if (j < numentradas)
+                    {
+                        entradas[j] = Normalizar(double.Parse(filadatos[j]), minentrada, maxentr);
+                    }
+                    else
+                    {
+                        salidas[j - numentradas] = Normalizar(double.Parse(filadatos[j]), minsal, maxsal);
+                    }
+                }*/
+                //entrada.Add(entradas);
+                //salida.Add(salidas);
+                return filadatos;
+            }
+            return fila;
         }
         static void leerDatos()
         {
             string datos = System.IO.File.ReadAllText(ruta).Replace("\r", "");
             string[] fila = datos.Split(Environment.NewLine.ToCharArray());
 
-            for(int i=0; i<fila.Length; i++)
+            for (int i = 0; i < fila.Length; i++)
             {
                 string[] filadatos = fila[i].Split(';');
                 double[] entradas = new double[numentradas];
                 double[] salidas = new double[numsalidas];
-                for(int j=0; j<filadatos.Length; j++)
+                for (int j = 0; j < filadatos.Length; j++)
                 {
                     if (j < numentradas)
                     {
-                        entradas[j] =Normalizar( double.Parse(filadatos[j]), minentrada, maxentr);
+                        entradas[j] = Normalizar(double.Parse(filadatos[j]), minentrada, maxentr);
                     }
                     else
                     {
-                        salidas[j - numentradas] =Normalizar( double.Parse(filadatos[j]), minsal, maxsal);
+                        salidas[j - numentradas] = Normalizar(double.Parse(filadatos[j]), minsal, maxsal);
                     }
                 }
                 entrada.Add(entradas);
                 salida.Add(salidas);
             }
         }
-       static void peticionsalida(Perceptron p)
+
+        public void peticionsalida(Perceptron p, double valoresX, double id)
         {
+
             while (true)
             {
                 double[] val = new double[numentradas];
-                for (int i = 0; i < numentradas; i++)
+                /*for (int j = 0; j < fila.Length; j++)
                 {
-                    Console.WriteLine("inserta valor: " + i + ": ");
-                    val[i] = Normalizar(double.Parse(Console.ReadLine()), minentrada, maxentr);
-                }
+                    filadatos = fila[j].Split(';');
+                    for (int h = 0; h < filadatos.Length; h++)
+                    {
+                        if (h < numentradas)
+                        {
+                            val[h] = Normalizar(double.Parse(filadatos[j]), minentrada, maxentr);
+                        }
+                    }
+                }*/
+                //double[] val = new double[numentradas];
+                /*for (int i = 0; i < numentradas; i++)
+                {   
+                    //Console.WriteLine("inserta valor: " + i + ": ");
+                    //val[i] = Normalizar(double.Parse(Console.ReadLine()), minentrada, maxentr);
+                    //val[i] = Normalizar(double.Parse(fila[i]), minentrada, maxentr);
+                }*/
+                val[0] = Normalizar(valoresX, minentrada, maxentr);
+                val[1] = Normalizar(id, minentrada, maxentr);
                 double[] sal = p.activacion(val);
                 for (int i = 0; i < numsalidas; i++)
                 {
@@ -80,30 +125,10 @@ namespace Perceptron
             }
         }
 
-        /**public void peticionsalida(Perceptron p, double valoresX, double id)
-       {
-
-           while (true)
-           {
-               double[] val = new double[numentradas];
-                
-               val[0] = Normalizar(valoresX, minentrada, maxentr);
-               val[1] = Normalizar(id, minentrada, maxentr);
-               double[] sal = p.activacion(val);
-               for (int i = 0; i < numsalidas; i++)
-               {
-                   Console.WriteLine("respuesta " + i + ": " + desnormalizado(sal[i], minsal, maxsal) + " ");
-
-               }
-               Console.WriteLine("");
-
-           }
-       }*/
-
         static void evaluar(Perceptron p, double inicio, double fin, double salto)
         {
             string salida = "";
-            for(double i = inicio; i< fin; i += salto)
+            for (double i = inicio; i < fin; i += salto)
             {
                 double res = p.activacion(new double[] { Normalizar(i, minentrada, maxentr) })[0];
                 salida += i + ";" + desnormalizado(res, minsal, maxsal) + "\n";
@@ -111,21 +136,16 @@ namespace Perceptron
             }
             System.IO.File.WriteAllText(rutasalida, salida);
         }
-        static void Main(string[] args)
-        {
-            /* Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WindowRecognition());*/
-                
-            
+
+        public Perceptron valorPerceptron() {
             Perceptron p;
-            
+
 
             if (!cargarred)
             {
                 leerDatos();
-                 p = new Perceptron(new int[] { entrada[0].Length, 36, 36, salida[0].Length });
-                while (!p.aprender(entrada, salida, 0.05, 0.01, 50000))
+                p = new Perceptron(new int[] { entrada[0].Length, 8, 8, salida[0].Length });
+                while (!p.aprender(entrada, salida, 0.05, 0.1, 5000000))
                 {
                     p = new Perceptron(new int[] { entrada[0].Length, 8, 8, salida[0].Length });
                 }
@@ -156,9 +176,9 @@ namespace Perceptron
                     BinaryFormatter formatter = new BinaryFormatter();
                     p = (Perceptron)formatter.Deserialize(fs);
                 }
-                catch(SerializationException e)
+                catch (SerializationException e)
                 {
-                    Console.WriteLine("fallo: "+e);
+                    Console.WriteLine("fallo: " + e);
                     throw;
                 }
                 finally
@@ -166,8 +186,16 @@ namespace Perceptron
                     fs.Close();
                 }
             }
-            peticionsalida(p);
-           // evaluar(p, 0, 5, 0.1); */
+            
+            //peticionsalida(p);
+            // evaluar(p, 0, 5, 0.1);   
+            return p;
+        }
+        public void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new WindowRecognition(valorPerceptron()));
         }
     }
     [Serializable]
@@ -200,7 +228,7 @@ namespace Perceptron
             double err = 0;
             for (int i = 0; i < salidareal.Length; i++)
             {
-                err +=  Math.Pow(salidareal[i] - salidadeseada[i], 2);
+                err += Math.Pow(salidareal[i] - salidadeseada[i], 2);
             }
             return err;
         }
@@ -215,14 +243,14 @@ namespace Perceptron
             return err;
         }
         List<String> log;
-        public bool aprender(List<double[]> ejementradas, List<double[]> ejemsalidas, double alpha, double maxerror,int numiteraciones)
+        public bool aprender(List<double[]> ejementradas, List<double[]> ejemsalidas, double alpha, double maxerror, int numiteraciones)
         {
             double err = 99999;
             log = new List<string>();
             while (err > maxerror)
             {
                 numiteraciones--;
-                if (numiteraciones <=0)
+                if (numiteraciones <= 0)
                 {
                     Console.WriteLine("-----------minimo local-----------");
                     return false;
@@ -233,8 +261,8 @@ namespace Perceptron
                     System.IO.File.WriteAllLines(@"graf.txt", log.ToArray());
                     return true;
                 }
-                 
-                aplicarBackPropagation(ejementradas,ejemsalidas,alpha);
+
+                aplicarBackPropagation(ejementradas, ejemsalidas, alpha);
                 err = errorGeneral(ejementradas, ejemsalidas);
                 log.Add(err.ToString());
                 Console.WriteLine(err);
@@ -309,17 +337,17 @@ namespace Perceptron
             }
         }
 
-        
+
         //l
         void agregarDelta()
         {
-            for(int i=1; i < Lista.Count; i++)
+            for (int i = 1; i < Lista.Count; i++)
             {
-                for(int j=0; j < Lista[i].numneuronas; j++)
+                for (int j = 0; j < Lista[i].numneuronas; j++)
                 {
-                    for(int k=0; k<Lista[i].neuronas[j].pesos.Length; k++)
+                    for (int k = 0; k < Lista[i].neuronas[j].pesos.Length; k++)
                     {
-                        deltas[i][j, k] += sigmas[i][j] * neurona.Sigmoide(Lista[i-1].neuronas[k].ultimaactivacion);
+                        deltas[i][j, k] += sigmas[i][j] * neurona.Sigmoide(Lista[i - 1].neuronas[k].ultimaactivacion);
                     }
                 }
             }
@@ -327,13 +355,13 @@ namespace Perceptron
         public void aplicarBackPropagation(List<double[]> entradas, List<double[]> salidasdeseadas, double alpha)
         {
             resetDeltas();
-            for(int i=0; i<entradas.Count; i++)
+            for (int i = 0; i < entradas.Count; i++)
             {
                 activacion(entradas[i]);
                 setSigmas(salidasdeseadas[i]);
                 setumbral(alpha);
                 agregarDelta();
-                
+
             }
             setpesos(alpha);
         }
@@ -345,11 +373,11 @@ namespace Perceptron
         public List<neurona> neuronas;
         public double[] salidas;
         public int numneuronas;
-        public Lista(int _numneuronas,int entradas, Random r)
+        public Lista(int _numneuronas, int entradas, Random r)
         {
             numneuronas = _numneuronas;
             neuronas = new List<neurona>();
-            for(int i =0; i<numneuronas; i++)
+            for (int i = 0; i < numneuronas; i++)
             {
                 neuronas.Add(new neurona(entradas, r));
             }
@@ -359,7 +387,7 @@ namespace Perceptron
         {
             //salidas = new double[neuronas.Count];
             List<double> salida = new List<double>();
-            for(int i=0; i < numneuronas; i++)
+            for (int i = 0; i < numneuronas; i++)
             {
                 salida.Add(neuronas[i].activacion(entradas));
                 //salidas[i] = neuronas[i].activacion(entradas);
@@ -367,7 +395,7 @@ namespace Perceptron
             salidas = salida.ToArray();
             return salida.ToArray();
         }
-       
+
     }
     [Serializable]
     class neurona
@@ -375,17 +403,17 @@ namespace Perceptron
         public double[] pesos;
         public double umbral;
         public double ultimaactivacion;
-        public neurona(int entradas,Random r)
+        public neurona(int entradas, Random r)
         {
-            umbral = 10* r.NextDouble()-5;
+            umbral = 10 * r.NextDouble() - 5;
             pesos = new double[entradas];
-            for(int i=0; i < entradas; i++)
+            for (int i = 0; i < entradas; i++)
             {
-                pesos[i] = 10* r.NextDouble() - 5;
+                pesos[i] = 10 * r.NextDouble() - 5;
             }
         }
 
-     
+
         public static double Sigmoide(double entrada)
         {
             return 1 / (1 + Math.Exp(-entrada));
