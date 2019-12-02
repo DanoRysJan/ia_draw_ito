@@ -18,13 +18,13 @@ namespace Perceptron
         static int numsalidas=1;
         static String ruta = @"D:/Dano/Escritorio/DatasetDraw/Dataset-Draw_his.csv";
         static String rutasalida = @"D:/Dano/Escritorio/DatasetDraw/salida.csv";
-        static String rutaneurona = @"D:/Dano/Escritorio/DatasetDraw/neurona.bin";
+        static String rutaneurona = @"D:/Dano/Escritorio/datosirisguardado.bin";
         static double maxentr=6;
         static double minentrada=5;
         static double minsal=2;
         static double maxsal=1;
-        static bool guardarred=true;
-        static bool cargarred = false;
+        static bool guardarred=false;
+        static bool cargarred = true;
 
         static double Normalizar(double valor, double min, double max)
         {
@@ -59,7 +59,7 @@ namespace Perceptron
                 salida.Add(salidas);
             }
         }
-        static void peticionsalida(Perceptron p)
+       static void peticionsalida(Perceptron p)
         {
             while (true)
             {
@@ -80,6 +80,26 @@ namespace Perceptron
             }
         }
 
+        /**public void peticionsalida(Perceptron p, double valoresX, double id)
+       {
+
+           while (true)
+           {
+               double[] val = new double[numentradas];
+                
+               val[0] = Normalizar(valoresX, minentrada, maxentr);
+               val[1] = Normalizar(id, minentrada, maxentr);
+               double[] sal = p.activacion(val);
+               for (int i = 0; i < numsalidas; i++)
+               {
+                   Console.WriteLine("respuesta " + i + ": " + desnormalizado(sal[i], minsal, maxsal) + " ");
+
+               }
+               Console.WriteLine("");
+
+           }
+       }*/
+
         static void evaluar(Perceptron p, double inicio, double fin, double salto)
         {
             string salida = "";
@@ -93,15 +113,11 @@ namespace Perceptron
         }
         static void Main(string[] args)
         {
-
-            
-            Application.EnableVisualStyles();
+            /* Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WindowRecognition());
+            Application.Run(new WindowRecognition());*/
+                
             
-            
-             
-            /*
             Perceptron p;
             
 

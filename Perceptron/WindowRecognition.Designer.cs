@@ -36,13 +36,17 @@
             this.Save = new System.Windows.Forms.Button();
             this.guessDraw = new System.Windows.Forms.Label();
             this.richTextBoxShowData = new System.Windows.Forms.RichTextBox();
+            this.drawToPaint = new System.Windows.Forms.Label();
+            this.IDnum = new System.Windows.Forms.Label();
+            this.drawToRecognition = new System.Windows.Forms.Label();
+            this.btnRecognition = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panelToDraw
             // 
             this.panelToDraw.BackColor = System.Drawing.Color.White;
             this.panelToDraw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panelToDraw.Location = new System.Drawing.Point(12, 12);
+            this.panelToDraw.Location = new System.Drawing.Point(12, 46);
             this.panelToDraw.Name = "panelToDraw";
             this.panelToDraw.Size = new System.Drawing.Size(255, 255);
             this.panelToDraw.TabIndex = 3;
@@ -52,7 +56,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(539, 368);
+            this.buttonExit.Location = new System.Drawing.Point(539, 420);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 29);
             this.buttonExit.TabIndex = 4;
@@ -62,7 +66,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(458, 368);
+            this.buttonClear.Location = new System.Drawing.Point(458, 420);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 29);
             this.buttonClear.TabIndex = 5;
@@ -74,17 +78,17 @@
             // 
             this.labelNumberToDraw.AutoSize = true;
             this.labelNumberToDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.labelNumberToDraw.Location = new System.Drawing.Point(58, 270);
+            this.labelNumberToDraw.Location = new System.Drawing.Point(37, 308);
             this.labelNumberToDraw.Name = "labelNumberToDraw";
-            this.labelNumberToDraw.Size = new System.Drawing.Size(143, 31);
+            this.labelNumberToDraw.Size = new System.Drawing.Size(50, 31);
             this.labelNumberToDraw.TabIndex = 9;
-            this.labelNumberToDraw.Text = "Dibuja un: ";
+            this.labelNumberToDraw.Text = "ID:";
             this.labelNumberToDraw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Training
             // 
             this.Training.AutoSize = true;
-            this.Training.Location = new System.Drawing.Point(103, 375);
+            this.Training.Location = new System.Drawing.Point(103, 427);
             this.Training.Name = "Training";
             this.Training.Size = new System.Drawing.Size(64, 17);
             this.Training.TabIndex = 10;
@@ -94,7 +98,7 @@
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(12, 368);
+            this.Save.Location = new System.Drawing.Point(12, 420);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 29);
             this.Save.TabIndex = 6;
@@ -104,31 +108,75 @@
             // 
             // guessDraw
             // 
-            this.guessDraw.AutoSize = true;
             this.guessDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guessDraw.Location = new System.Drawing.Point(173, 368);
+            this.guessDraw.Location = new System.Drawing.Point(173, 420);
             this.guessDraw.Name = "guessDraw";
-            this.guessDraw.Size = new System.Drawing.Size(266, 24);
+            this.guessDraw.Size = new System.Drawing.Size(76, 24);
             this.guessDraw.TabIndex = 11;
-            this.guessDraw.Text = "Aqui aparece el dibujo a pintar";
+            this.guessDraw.Text = "Dibuja:";
             // 
             // richTextBoxShowData
             // 
             this.richTextBoxShowData.Font = new System.Drawing.Font("Courier New", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxShowData.Location = new System.Drawing.Point(281, 12);
+            this.richTextBoxShowData.Location = new System.Drawing.Point(281, 46);
             this.richTextBoxShowData.Name = "richTextBoxShowData";
             this.richTextBoxShowData.ReadOnly = true;
-            this.richTextBoxShowData.Size = new System.Drawing.Size(333, 350);
+            this.richTextBoxShowData.Size = new System.Drawing.Size(333, 255);
             this.richTextBoxShowData.TabIndex = 12;
             this.richTextBoxShowData.Text = "";
             this.richTextBoxShowData.WordWrap = false;
+            // 
+            // drawToPaint
+            // 
+            this.drawToPaint.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.drawToPaint.Location = new System.Drawing.Point(238, 420);
+            this.drawToPaint.Name = "drawToPaint";
+            this.drawToPaint.Size = new System.Drawing.Size(120, 24);
+            this.drawToPaint.TabIndex = 13;
+            this.drawToPaint.Text = "drawToPaint";
+            // 
+            // IDnum
+            // 
+            this.IDnum.AutoSize = true;
+            this.IDnum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.IDnum.Location = new System.Drawing.Point(97, 308);
+            this.IDnum.Name = "IDnum";
+            this.IDnum.Size = new System.Drawing.Size(89, 31);
+            this.IDnum.TabIndex = 14;
+            this.IDnum.Text = "numId";
+            this.IDnum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // drawToRecognition
+            // 
+            this.drawToRecognition.AutoSize = true;
+            this.drawToRecognition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.drawToRecognition.Location = new System.Drawing.Point(151, 9);
+            this.drawToRecognition.Name = "drawToRecognition";
+            this.drawToRecognition.Size = new System.Drawing.Size(325, 31);
+            this.drawToRecognition.TabIndex = 15;
+            this.drawToRecognition.Text = "Adivinare, tu dibujo es . . .";
+            this.drawToRecognition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnRecognition
+            // 
+            this.btnRecognition.Location = new System.Drawing.Point(12, 9);
+            this.btnRecognition.Name = "btnRecognition";
+            this.btnRecognition.Size = new System.Drawing.Size(75, 29);
+            this.btnRecognition.TabIndex = 16;
+            this.btnRecognition.Text = "Adivinar !";
+            this.btnRecognition.UseVisualStyleBackColor = true;
+            this.btnRecognition.Click += new System.EventHandler(this.btnRecognition_Click);
             // 
             // WindowRecognition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(626, 420);
+            this.ClientSize = new System.Drawing.Size(634, 461);
+            this.Controls.Add(this.btnRecognition);
+            this.Controls.Add(this.drawToRecognition);
+            this.Controls.Add(this.IDnum);
+            this.Controls.Add(this.drawToPaint);
             this.Controls.Add(this.richTextBoxShowData);
             this.Controls.Add(this.guessDraw);
             this.Controls.Add(this.Training);
@@ -154,5 +202,9 @@
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Label guessDraw;
         private System.Windows.Forms.RichTextBox richTextBoxShowData;
+        private System.Windows.Forms.Label drawToPaint;
+        private System.Windows.Forms.Label IDnum;
+        private System.Windows.Forms.Label drawToRecognition;
+        private System.Windows.Forms.Button btnRecognition;
     }
 }

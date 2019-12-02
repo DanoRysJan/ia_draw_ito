@@ -25,7 +25,8 @@ namespace Perceptron
         int widthFinal, heithFinal;
 
         //Data to change. It´s segment of your data.
-        int typeOutput = 1;
+        int typeOutput = 4;
+        int idDraw;
 
         public WindowRecognition()
         {
@@ -91,16 +92,23 @@ namespace Perceptron
                 panelToDraw.Width = 255;
                 panelToDraw.Height = 255;
                 labelNumberToDraw.Visible = true;
+                drawToPaint.Visible = false;
                 guessDraw.Visible = false;
                 richTextBoxShowData.Visible = true;
+                IDnum.Visible = true;
+                drawToRecognition.Visible = false;
             }
             else
             {
                 panelToDraw.Width = 600;
                 panelToDraw.Height = 350;
                 labelNumberToDraw.Visible = false;
+                drawToPaint.Visible = true;
                 guessDraw.Visible = true;
                 richTextBoxShowData.Visible = false;
+                IDnum.Visible = false;
+                drawToRecognition.Visible = true;
+
             }
         }
 
@@ -302,6 +310,112 @@ namespace Perceptron
                     }
                 }
             }
+        }
+
+        public Bitmap handwritingRecognitionRecognition()
+        {
+            //Create bitmap with width and height are equal to panel1
+            Bitmap bmp = new Bitmap(panelToDraw.Width, panelToDraw.Height);
+            //Use using like dispose function to clean up all resources
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                //Fix sixe and location of panel1 in screen
+                Rectangle rect = panelToDraw.RectangleToScreen(panelToDraw.ClientRectangle);
+                //Copy panel1 from screen
+                g.CopyFromScreen(rect.Location, Point.Empty, panelToDraw.Size);
+            }
+
+            // Instance of next pixel
+            posYU = bmp.Width;
+            posYR = 0;
+            posYD = bmp.Height;
+
+            //Realice the mapping
+            mapping(bmp);
+
+            //Final result of mapping
+            posXFinalA = posXLeft;
+            posYFinalA = posYUp;
+            posXFinalD = posXDown;
+            posYFinalD = posYRigth;
+            widthFinal = posXFinalD - posYFinalA;
+            heithFinal = posYFinalD - posXFinalA;
+
+            //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
+            string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
+            richTextBoxShowData.Lines = ids;
+
+            //Change
+            //saveBmp(scaleBmp(cutBmp(bmp, posXLeft, posYUp, posXDown, posYRigth), 150, 150));
+
+            histZero = 0;
+            histOne = 0;
+            posYU = bmp.Width;
+            posYR = 0;
+            posYD = bmp.Height;
+            return scaleBmp(cutBmp(bmp, posXLeft, posYUp, posXDown, posYRigth), 150, 150); // to here
+        }
+
+        public void handWritingScalarRecognition(Bitmap bmp)
+        {
+            int zeroNumber;
+            int oneNumber;
+            int index;
+            // Instance of next pixel
+            posYU = bmp.Width;
+            posYR = 0;
+            posYD = bmp.Height;
+
+            mapping(bmp);
+            //Put value in each pixel into array and not show value of pixels == 0, show value of pixels == 1 
+            string[] ids = pixels.Select(a => String.Join("", a.Select(b => b == 0 ? " " : "1"))).ToArray();
+           // string rutaCompleta = "D:/Dano/Escritorio/Dataset-Draw" + "_his.txt";
+            //using (StreamWriter file = new StreamWriter(rutaCompleta, true))
+            //{
+               // file.WriteLine(histZero + "," + histOne + "," + typeOutput + "," + widthFinal + "," + heithFinal);
+                //file.Close();
+            zeroNumber = histZero;
+            oneNumber = histOne;
+            index = idDraw;
+            //}
+            //String[] ids = pixels.Select(a => String.Join("", a).ToArray();
+            richTextBoxShowData.Lines = ids;
+
+           // clearScreen();
+
+            histZero = 0;
+            histOne = 0;
+            posYU = bmp.Width;
+            posYR = 0;
+            posYD = bmp.Height;
+        }
+
+        public void drawNeuronalRecognition(double error)
+        {
+            if(error == 1){
+
+            }
+            if (error == 2)
+            {
+
+            }
+            if (error == 3)
+            {
+
+            }
+            if (error == 4)
+            {
+
+            }
+            if (error == 5)
+            {
+
+            }
+        }
+
+        private void btnRecognition_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
